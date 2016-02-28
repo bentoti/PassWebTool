@@ -11,10 +11,17 @@ class RenderCLI(object):
     def ask_pwid(self):
         return raw_input('please enter PWID:')
 
-    def print_entry(self, e, fields=None):
-        if fields is None: fields = e.keys()
-        for f in fields:
-            print f + "=" + str(e[f])
+
+    def print_entry(self, e, mode=''):
+        if e.has_key(mode):
+            print e[mode]
+        elif mode == 'mysql':
+            print "-h'" + e['host'] + "' -u'" + e['username'] + "' -p'" + e['password'] + "'"
+        elif mode == 'url':
+            print e['username'] + ':"' + e['password'] + '"@' + e['host']
+        else: # default
+            for f in e.keys():
+                print f + "=" + str(e[f]) + linesep, #+ "<br>"
 
     def edit_entry(self, entry):
         self.output( "pwid: " + str(entry['pwid']) )
@@ -58,10 +65,6 @@ class RenderCGI(RenderCLI):
  </table>
 </form>
 """
-    def print_entry(self, e, fields=None):
-        if fields is None: fields = e.keys()
-        for f in fields:
-            print f + "=" + str(e[f]) + linesep, #+ "<br>"
 
     def edit_entry(self, e):
         if e['pwid'] == None: e['pwid'] = "None"

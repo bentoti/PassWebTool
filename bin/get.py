@@ -23,5 +23,5 @@ if __name__ == '__main__':
         ui.quit()
 
     entry = KpDb.get_pwid(pwid=e['pwid'])
-    ui.print_entry(entry)
+    ui.print_entry(entry, mode=opmode)
 

@@ -13,10 +13,7 @@ wget --post-data="pwid=79IXES" -qO - --no-check-certificate https://PassWebTool/
 
 
 # usage
-```
-import requests
-print requests.post("https://PassWebTool/Get.py", data={'pwid': '79IXES'}).text
-```
+see pwt_client.sh
 
 # Installation
 Reference system is CentOZ7 or Fedora around 23
