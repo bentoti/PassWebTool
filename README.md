@@ -28,18 +28,18 @@ Reference system is CentOZ7 or Fedora around 23
 
 ## setup permissions
 ```
-chown root:apache   etc/pwt.ini
-chown -R root:root     bin
-chown -R apache:root  var
+chown root:apache      etc/pwt.ini
+chown -R root:root     bin/
+chown -R apache:root   var/
 ```
 
-## vhost
+## apache vhost
+```
 <VirtualHost *:80>
     ServerName      PassWebTool
     ServerAlias     PassWebTool.local PassWebTool.private
     Redirect        /       https://PassWebTool
 </VirtualHost>
-# http://www.the-art-of-web.com/system/apache-authorization/
 <VirtualHost *:443>
     ServerName      PassWebTool
     ServerAlias     PassWebTool.local PassWebTool.private
@@ -48,21 +48,22 @@ chown -R apache:root  var
     DocumentRoot    /opt/PassWebTool/bin
     LimitRequestBody 4096
 
-    SetEnv cfgfile ../etc/crapo.ini
+#    SetEnv cfgfile ../etc/somewhere.pwt.ini
 
     <Directory /opt/PassWebTool/bin>
-        Alias / get.py
-        #DirectoryIndex  get.py
+        DirectoryIndex  get.py
         Options +ExecCGI
         AddHandler cgi-script .py
-        # requirements for 'get.py' and DirectoryIndex calls
+
+        # requirements for 'get.py' and DirectoryIndex calls  (public access for pwid only)
         <RequireAll>
-            Require ip   10.0.0.0/8  172.16.0.0/12  192.168.0.0/16 127.0.0.1/32
+            Require ip   10.0.0.0/8  172.16.0.0/12  192.168.0.0/16  127.0.0.1/32
         </RequireAll>
+
         <FilesMatch "(?<!get.py)$">
-            # requirements for all other calls like 'list.py' etc
+            # requirements for all calls not matchin 'get.py' (administrative access to edit.py and list.py )
             <RequireAll>
-                Require ip   10.0.0.0/8  172.16.0.0/12  192.168.0.0/16 127.0.0.1/32
+                Require ip   10.0.0.0/8  172.16.0.0/12  192.168.0.0/16  127.0.0.1/32
                 AuthType Basic
                 AuthName "PassWebTool"
                 AuthUserFile "/opt/PassWebTool/etc/pwt.htpasswd"
@@ -79,3 +80,4 @@ chown -R apache:root  var
     SSLCertificateFile      /etc/httpd/ssl/PassWebTool.crt
     SSLCertificateKeyFile   /etc/httpd/ssl/PassWebTool.key
 </VirtualHost>
+```

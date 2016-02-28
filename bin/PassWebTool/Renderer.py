@@ -61,7 +61,7 @@ class RenderCGI(RenderCLI):
     def print_entry(self, e, fields=None):
         if fields is None: fields = e.keys()
         for f in fields:
-            print f + "=" + str(e[f]) + linesep #+ "<br>"
+            print f + "=" + str(e[f]) + linesep, #+ "<br>"
 
     def edit_entry(self, e):
         if e['pwid'] == None: e['pwid'] = "None"
