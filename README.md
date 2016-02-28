@@ -1,44 +1,39 @@
-# $Id: //gbl/SF/PassWebTool/README.txt#1 $
-h1. PassWebTool
-Purpose: make passwords from a KeePass Safe available through HTTP(S)
-Motivation: often there's no PubPriv. Key authentication available for certain Services (e.g. MySql), but you need to
-have a password for your automation anyway. PassWebTool let's you acquire your password though HTTP(S). This removes
-the necessity to store the password plaintext in your script, on your source or target system, or use no-passwd accounts.
+# About
+When writing scripts for infrastructure automation i often end up at a point where i need a plaintext password for a
+certain service. MySQL, Coldfusiuon Administrator, Webinterfaces to appliances, etc. are notorious unaware of public-
+private key mechanisms and i often call http://user:pass@womewhere in a script.
 
-imagine:  mysqldump ... -U backup -P `wget -q0 - https://PassWeb/get?pwid=45346643435464322`
+PassWebTool eliminates the need to have that Password in the script itself but can be accessed whenever needed.
 
-h2. internals
-We call it PWID - PassWordIDentification, but it's actually only the URL field in KeePass.
-Titles are abused for the Hostname/Service:  HOSTNAME::SERVICE
+## How it works
+PassWebTool is a Python script which interfaces between CGI(or CLI) and a KeePass KDB Database. You can acquire a
+specific Password by requesting a certain Identifier (PWID)
 
-h1. Usage
-Getting a list of entries:
- ./PassWebToolList.py
- wget -q0 - http://localhost/cgi-bin/PassWebToolList.py
-
-Add a password (will return new PWID):
- ./PassWebToolAdd.py -H host1234 -S service1234 -U user1234 -P pass1234
- wget --post-data='host=dihei&service=juheee&username=ich&password=miiispasswort' -qO - http://localhost/cgi-bin/PassWebToolAdd.py
-
-Get a specific Password:
- ./PassWebToolGet.py -I 8c5900601ebdade4f33e93e22b3077de
- wget --post-data='pwid=8c5900601ebdade4f33e93e22b3077de' -qO - http://localhost/cgi-bin/PassWebToolGet.py
-
- import requests
-print requests.post("http://localhost/cgi-bin/PassWebToolGet.py", data={'pwid': '958c6a28cd3ebf2496962e9132931bba'}).text
+wget --post-data="pwid=79IXES" -qO - --no-check-certificate https://PassWebTool/get.py
 
 
-h1. Installation
-h2. basics
+# usage
+```
+import requests
+print requests.post("https://PassWebTool/Get.py", data={'pwid': '79IXES'}).text
+```
 
+# Installation
+Reference system is CentOZ7 or Fedora around 23
 
+## base requirements
+- apache
+- python
+- python keepass lib
 
+## setup permissions
+```
 chown root:apache   etc/pwt.ini
 chown -R root:root     bin
 chown -R apache:root  var
+```
 
-
-
+## vhost
 <VirtualHost *:80>
     ServerName      PassWebTool
     ServerAlias     PassWebTool.local PassWebTool.private

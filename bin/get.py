@@ -22,8 +22,6 @@ if __name__ == '__main__':
     if e['pwid'] is None:
         ui.quit()
 
-    print()
-
     entry = KpDb.get_pwid(pwid=e['pwid'])
     ui.print_entry(entry)
 
