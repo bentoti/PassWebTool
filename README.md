@@ -78,3 +78,16 @@ chown -R apache:root   var/
     SSLCertificateKeyFile   /etc/httpd/ssl/PassWebTool.key
 </VirtualHost>
 ```
+
+```
+yum install -y python-crypto
+cd /usr/local/src/
+git clone https://github.com/Friz-zy/python-keepass.git
+cd  python-keepass
+python setup.py install
+yum install httpd mod_ssl
+
+systemctl enable httpd
+
+htpasswd -c /opt/PassWebTool/etc/pwt.htpasswd pwt
+```

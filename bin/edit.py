@@ -18,6 +18,11 @@ except PassWebToolException, e:
 
 if __name__ == '__main__':
     new = e
+
+    ######
+    print opmode
+
+
     # check if this is a removal
     if opmode == 'delete' or opmode == 'del':
         if new['pwid'] is None:
@@ -26,10 +31,11 @@ if __name__ == '__main__':
         if not KpDb.remove(pwid=new['pwid']):
             ui.print_error("could not remove '"+str(new['pwid'])+"'")
         ui.print_entry_deleted(new['pwid'])
-    ######
+
+
 
     if new['pwid'] is None: new['pwid'] = generate_pwid()
-    if new['password'] == None: new['password'] = generate_pwid(size=12,chars=ascii_lowercase+ascii_uppercase+digits+punctuation)
+    #if new['password'] == None: new['password'] = generate_pwid(size=12,chars=ascii_lowercase+ascii_uppercase+digits)
 
     if opmode is None or opmode == '' or opmode == 'edit':
         old = KpDb.get_pwid(pwid=new['pwid'])

@@ -87,5 +87,7 @@ def parseParams():
         d['pwid'] = None
 
     opmode = form.getvalue('mode') or options.mode or None
+    if form.getvalue('delete') or options.delete:
+        opmode = 'delete'
     return opmode, c, d
 
