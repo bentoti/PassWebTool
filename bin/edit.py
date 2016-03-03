@@ -35,7 +35,7 @@ if __name__ == '__main__':
 
 
     if new['pwid'] is None: new['pwid'] = generate_pwid()
-    #if new['password'] == None: new['password'] = generate_pwid(size=12,chars=ascii_lowercase+ascii_uppercase+digits)
+    if new['password'] == None: new['password'] = generate_pwid(size=12,chars=ascii_lowercase+ascii_uppercase+digits)
 
     if opmode is None or opmode == '' or opmode == 'edit':
         old = KpDb.get_pwid(pwid=new['pwid'])
