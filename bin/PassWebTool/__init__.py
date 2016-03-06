@@ -1,28 +1,11 @@
-# $Id: //gbl/SF/PassWebTool/PassWebToolClass.py#1 $
-from keepass import kpdb
+# -*- coding: utf-8 -*-
+import logging, optparse, cgi, time, getpass
 from string import ascii_uppercase, ascii_lowercase,digits, punctuation
 from random import choice
-import logging, optparse, cgi, time, getpass
 from os import environ
 from ConfigParser import ConfigParser
-
 from PassWebToolClass import PassWebToolException
 
-#import logging.handlers
-#f = logging.Formatter(fmt='%(levelname)s:%(name)s: %(message)s '
-#    '(%(asctime)s; %(filename)s:%(lineno)d)',
-#    datefmt="%Y-%m-%d %H:%M:%S")
-#handlers = [
-#    logging.handlers.RotatingFileHandler('rotated.log', encoding='utf8',
-#        maxBytes=100000, backupCount=1),
-#    logging.StreamHandler()
-#]
-#root_logger = logging.getLogger()
-#root_logger.setLevel(logging.DEBUG)
-#for h in handlers:
-#    h.setFormatter(f)
-#    h.setLevel(logging.DEBUG)
-#    root_logger.addHandler(h)
 
 def generate_pwid(size=6, chars=ascii_uppercase + digits):
     return ''.join(choice(chars) for _ in range(size))
@@ -72,7 +55,7 @@ def parseParams():
         raise PassWebToolException("Error while parsing cfgfile: " + str(e))
 
     try:
-        logging.basicConfig(format='%(levelname)s:%(message)s', filename=logfile, level=logverb)
+        logging.basicConfig(format='%(asctime)s %(levelname)s:%(message)s', filename=logfile, level=logverb)
     except IOError, e:
         raise PassWebToolException("Could not initiate logging: " + str(e))
 
@@ -90,4 +73,3 @@ def parseParams():
     if form.getvalue('delete') or options.delete:
         opmode = 'delete'
     return opmode, c, d
-

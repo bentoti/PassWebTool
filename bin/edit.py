@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from PassWebTool import parseParams, PassWebToolException, environ
 from PassWebTool import generate_pwid, ascii_lowercase, ascii_uppercase, digits, punctuation
 from PassWebTool.PassWebToolClass import KpDbClass

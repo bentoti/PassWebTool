@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from PassWebTool import parseParams, PassWebToolException, environ
 from PassWebTool.PassWebToolClass import KpDbClass
 from PassWebTool.Renderer import RenderCLI, RenderCGI

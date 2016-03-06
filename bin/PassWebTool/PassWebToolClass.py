@@ -1,8 +1,8 @@
-# $Id: //gbl/SF/PassWebTool/PassWebToolClass.py#1 $
+# -*- coding: utf-8 -*-
 from keepass import kpdb
+import logging, optparse, cgi, time, getpass
 from string import ascii_uppercase, ascii_lowercase,digits, punctuation
 from random import choice
-import logging, optparse, cgi, time, getpass
 from pprint import pprint
 
 class KpDbClass(object):
