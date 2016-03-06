@@ -11,6 +11,9 @@ class RenderCLI(object):
     def ask_pwid(self):
         return raw_input('please enter PWID:')
 
+    def print_title(self, s):
+        self.output("--- " + s + " ---")
+
 
     def print_entry(self, e, mode=''):
         if e.has_key(mode):
@@ -55,12 +58,26 @@ class RenderCGI(RenderCLI):
     def __init__(self):
         print "Content-type:text/html" + linesep
 
+    def print_title(self, s):
+        print "<h2>" + s + "</h2>"
+
     def ask_pwid(self):
         print """
 <form method="post" action="get.py">
  <table>
-    <tr> <td>PWID:</td>   <td><input type="text" value="" name="pwid" autocomplete='off'></td>
-    <td><input type="submit" name="mode" value="get" /></td>  </tr>
+    <tr> <td>PWID:</td>   <td><input type="text" value="" name="pwid" autocomplete='off'></td></tr>
+    <tr><td><select name="mode">
+        <option value="get">format:all</option>
+        <option value="mysql">format:mysql</option>
+        <option value="url">format:url</option>
+        <option value="user">field:user</option>
+        <option value="password">field:password</option>
+        <option value="host">field:host</option>
+        <option value="service">field:service</option>
+        <option value="note">field:note</option>
+    </select></td>
+        <td><input type="submit" /></td>
+    </tr>
     </tr>
  </table>
 </form>
@@ -119,7 +136,7 @@ class RenderCGI(RenderCLI):
 
     def quit(self, s='', r=0):
         if s != '': print s
-        print "<br><br><br><br><br>"
+        print "<br><br><br><br><br>   <sub>"
         print "PassWebTool"
         print "<a href='get.py'>get</a>",
         print "<a href='list.py'>list</a>",
@@ -128,4 +145,6 @@ class RenderCGI(RenderCLI):
             print environ['REMOTE_USER']
         else:
             print "None"
+
+        print "</sub>"
         quit(r)

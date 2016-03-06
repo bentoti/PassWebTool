@@ -19,8 +19,7 @@ except PassWebToolException, e:
 if __name__ == '__main__':
     new = e
 
-    ######
-    print opmode
+    ui.print_title("EDIT")
 
 
     # check if this is a removal

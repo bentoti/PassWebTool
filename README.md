@@ -9,25 +9,45 @@ PassWebTool eliminates the need to have that Password in the script itself but c
 PassWebTool is a Python script which interfaces between CGI(or CLI) and a KeePass KDB Database. You can acquire a
 specific Password by requesting a certain Identifier (PWID)
 
-wget --post-data="pwid=79IXES" -qO - --no-check-certificate https://PassWebTool/get.py
-
+wget --post-data="pwid=79IXES" -qO - https://PassWebTool/get.py
 
 # usage
 see pwt_client.sh
 
 # Installation
-Reference system is CentOZ7 or Fedora around 23
+Reference system is a CentOS 7
+Please use 'keepassx' to create the initial KDB backend file, other tools might not work fine.
 
 ## base requirements
-- apache
-- python
-- python keepass lib
+```
+yum install -y epel-release
+yum install -y httpd mod_ssl python-pip python-devel gcc autoconf
+pip install --upgrade pip
+pip install keepass
+
+vi /etc/httpd/conf/httpd.conf /etc/httpd/conf.d/vhost-pwt.conf ; systemctl restart httpd
+
+htpasswd -c /opt/PassWebTool/etc/pwt.htpasswd pwt
+systemctl enable httpd
+```
+## additional for X11 keepassx
+```
+yum groupinstall -y "X Window System"
+yum install -y xorg-x11-fonts-Type1 keepassx
+```
+## clone
+```
+cd /opt
+git clone <project_url>
+cd PassWebTool
+mkdir var/log
+```
 
 ## setup permissions
 ```
 chown root:apache      etc/pwt.ini
 chown -R root:root     bin/
-chown -R apache:root   var/
+chown -R apache:root   var/*
 ```
 
 ## apache vhost
@@ -77,17 +97,4 @@ chown -R apache:root   var/
     SSLCertificateFile      /etc/httpd/ssl/PassWebTool.crt
     SSLCertificateKeyFile   /etc/httpd/ssl/PassWebTool.key
 </VirtualHost>
-```
-
-```
-yum install -y python-crypto
-cd /usr/local/src/
-git clone https://github.com/Friz-zy/python-keepass.git
-cd  python-keepass
-python setup.py install
-yum install httpd mod_ssl
-
-systemctl enable httpd
-
-htpasswd -c /opt/PassWebTool/etc/pwt.htpasswd pwt
 ```

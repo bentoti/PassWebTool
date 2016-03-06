@@ -16,6 +16,8 @@ except PassWebToolException, e:
     ui.quit()
 
 if __name__ == '__main__':
+    ui.print_title("LIST")
+
     ui.print_list_header()
     for each in KpDb.get():
         ui.print_list_entry(each)

@@ -17,6 +17,7 @@ except PassWebToolException, e:
 
 if __name__ == '__main__':
     if e['pwid'] is None:
+        ui.print_title("GET by PWID")
         e['pwid'] = ui.ask_pwid()
 
     if e['pwid'] is None:
