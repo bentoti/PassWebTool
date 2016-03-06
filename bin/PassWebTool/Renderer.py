@@ -114,9 +114,9 @@ class RenderCGI(RenderCLI):
     def print_list_entry(self, entry):
         print "<tr>"
         for f in ['host', 'service', 'username', 'notes' , 'pwid']:
-            if f == 'notes' and entry['notes'] is not None and entry['notes'].startswith('http'):
-                print "<td><a href='+each['notes']+'>"+entry['notes']+"</a></td>"
-            else:
+            # if f == 'notes' and entry['notes'] is not None and entry['notes'].startswith('http'):
+            #     print "<td><a href='"+each['notes']+"'>"+entry['notes']+"</a></td>"
+            # else:
                 print "<td>" + str(entry[f]) + "</td>"
 
         print "<form method='post' action='edit.py'>"
