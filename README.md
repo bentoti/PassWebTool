@@ -19,13 +19,12 @@ get.py?pwid=<pwid> to fetch that password or entry.
 see pwt_client.sh
 
 # Installation
-Reference system is a CentOS 7
-Please use 'keepassx' to create the initial KDB backend file, other tools might not work fine.
+Reference system is a CentOS 7. Please use 'keepassx' to create the initial KDB backend file, other tools might not work fine.
 
 ## base requirements
 ```
 yum install -y epel-release
-yum install -y httpd mod_ssl python-pip python-devel gcc autoconf
+yum install -y httpd mod_ssl python-pip python-devel gcc autoconf git
 pip install --upgrade pip
 pip install keepass
 

@@ -124,6 +124,7 @@ class RenderCGI(RenderCLI):
 
         print "<td><input type='submit' name='mode' value='edit'/></td></form>"
 
+
         print "<form method='post' action='get.py'>"
         print "<input type='hidden' name='pwid' value='" + str(entry['pwid']) + "' >"
         print " <td><input type='submit' name='mode' value='get'/></td></form>"
