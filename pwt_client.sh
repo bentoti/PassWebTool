@@ -9,10 +9,8 @@ function getpwid_curl(){
 }
 
 function getpwid_py() {
-    /usr/bin/env python -c "
-import requests
-print requests.post('https://PassWebTool/get.py', verify=False, data={'pwid': '$1','mode':'$2'}).text
-" 2> /dev/null
+    /usr/bin/env python -c "import requests
+print requests.post('https://PassWebTool/get.py', data={'pwid': '$1','mode':'$2'}, verify=False).text" 2> /dev/null
 }
 
 cID="0I1L5X"

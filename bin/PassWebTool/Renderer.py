@@ -18,10 +18,15 @@ class RenderCLI(object):
     def print_entry(self, e, mode=''):
         if e.has_key(mode):
             print e[mode]
+        elif mode == 'password-nl':
+            for l in e['password'].split(' '):
+                print l
         elif mode == 'mysql':
             print "-h'" + e['host'] + "' -u'" + e['username'] + "' -p'" + e['password'] + "'"
         elif mode == 'url':
-            print e['username'] + ':"' + e['password'] + '"@' + e['host']
+            print e['username'] + ':' + e['password'] + '@' + e['host']
+        elif mode == 'user@host':
+            print e['username'] + '@' + e['host']
         else: # default
             for f in e.keys():
                 print f + "=" + str(e[f]) + linesep, #+ "<br>"
@@ -70,11 +75,13 @@ class RenderCGI(RenderCLI):
         <option value="get">format:all</option>
         <option value="mysql">format:mysql</option>
         <option value="url">format:url</option>
+        <option value="user@host">format:user@host</option>
         <option value="user">field:user</option>
         <option value="password">field:password</option>
         <option value="host">field:host</option>
         <option value="service">field:service</option>
         <option value="note">field:note</option>
+        <option value="password-nl">field:password-newline</option>
     </select></td>
         <td><input type="submit" /></td>
     </tr>
