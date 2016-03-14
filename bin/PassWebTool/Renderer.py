@@ -27,6 +27,8 @@ class RenderCLI(object):
             print e['username'] + ':' + e['password'] + '@' + e['host']
         elif mode == 'user@host':
             print e['username'] + '@' + e['host']
+        elif mode == 'simple':
+            print e['host'] + '\t' + e['username'] + '\t' + e['password']
         else: # default
             for f in e.keys():
                 print f + "=" + str(e[f]) + linesep, #+ "<br>"
@@ -73,6 +75,7 @@ class RenderCGI(RenderCLI):
     <tr> <td>PWID:</td>   <td><input type="text" value="" name="pwid" autocomplete='off'></td></tr>
     <tr><td><select name="mode">
         <option value="get">format:all</option>
+        <option value="simple">format:simple</option>
         <option value="mysql">format:mysql</option>
         <option value="url">format:url</option>
         <option value="user@host">format:user@host</option>
