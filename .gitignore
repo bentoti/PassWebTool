@@ -1,1 +1,4 @@
 *.pyc
+.idea
+etc/pwt.htpasswd
+var/log
