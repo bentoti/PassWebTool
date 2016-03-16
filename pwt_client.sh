@@ -1,17 +1,15 @@
 #!/bin/bash
 
-function getpwid_wget() {
-    wget --post-data="pwid=$1&mode=$2" -qO - --no-check-certificate https://PassWebTool/get.py
-}
+function getpwid_wget() { wget --post-data="pwid=$1&mode=$2" -qO - --no-check-certificate https://PassWebTool/get.py; }
 
-function getpwid_curl(){
-    curl -s --data "pwid=$1&mode=$2" --insecure https://PassWebTool/get.py
-}
+function getpwid_curl(){ curl -s --data "pwid=$1&mode=$2" --insecure https://PassWebTool/get.py; }
 
 function getpwid_py() {
     /usr/bin/env python -c "import requests
 print requests.post('https://PassWebTool/get.py', data={'pwid': '$1','mode':'$2'}, verify=False).text" 2> /dev/null
 }
+
+getpwid_wget TKLQYC password
 
 cID="0I1L5X"
 cred_all=`getpwid_curl ${cID}`
