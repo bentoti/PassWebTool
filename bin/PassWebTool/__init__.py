@@ -3,6 +3,7 @@ import logging, optparse, cgi, time, getpass
 from string import ascii_uppercase, ascii_lowercase,digits, punctuation
 from random import choice
 from os import environ
+from time import sleep
 from ConfigParser import ConfigParser
 from PassWebToolClass import PassWebToolException
 
@@ -49,7 +50,8 @@ def parseParams():
 
         c = { 'kpfile': cfgfile.get("KeePass", "file"),
               'kppass': cfgfile.get("KeePass", "pass"),
-              'kpgroup': cfgfile.get("KeePass", "new_folder") }
+              'kpgroup': cfgfile.get("KeePass", "new_folder"),
+              'delay_answer': int(cfgfile.get("PassWebTool", "delay_answer")) / 1000}
 
     except Exception, e:
         raise PassWebToolException("Error while parsing cfgfile: " + str(e))

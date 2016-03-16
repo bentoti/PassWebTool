@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from PassWebTool import parseParams, PassWebToolException, environ
+from PassWebTool import parseParams, PassWebToolException, environ, sleep
 from PassWebTool.PassWebToolClass import KpDbClass
 from PassWebTool.Renderer import RenderCLI, RenderCGI
 
@@ -25,5 +25,8 @@ if __name__ == '__main__':
         ui.quit()
 
     entry = KpDb.get_pwid(pwid=e['pwid'])
+
+    sleep(config['delay_answer'])  # don't go too fast
+
     ui.print_entry(entry, mode=opmode)
 

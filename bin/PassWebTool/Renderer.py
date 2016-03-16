@@ -148,14 +148,16 @@ class RenderCGI(RenderCLI):
     def quit(self, s='', r=0):
         if s != '': print s
         print "<br><br><br><br><br>   <sub>"
-        print "PassWebTool"
-        print "<a href='get.py'>get</a>",
+        print "<a href=https://github.com/maldex/PassWebTool>PassWebTool</a>&nbsp;",
         print "<a href='list.py'>list</a>",
-        print "<a href='edit.py'>edit</a>     auth:",
+        print "<a href='get.py'>get</a>",
+        print "<a href='edit.py'>edit</a>",
+        print "&nbsp;auth:"
         if environ.has_key('REMOTE_USER'):
             print environ['REMOTE_USER']
         else:
             print "None"
+
 
         print "</sub>"
         quit(r)
