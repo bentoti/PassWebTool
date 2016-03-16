@@ -17,7 +17,7 @@ class RenderCLI(object):
     def print_entry(self, e, mode=''):
         if e['password'].startswith("-----BEGIN RSA PRIVATE KEY-----") and e['password'].endswith('-----END RSA PRIVATE KEY-----'):
             e['password'] = '-----BEGIN RSA PRIVATE KEY-----' + \
-                '\n'.join( e['password'][len("-----BEGIN RSA PRIVATE KEY-----"):-len('-----END RSA PRIVATE KEY-----')].split(' ') ) + \
+                e['password'][len("-----BEGIN RSA PRIVATE KEY-----"):-len('-----END RSA PRIVATE KEY-----')].replace(' ','\n') + \
                 '-----END RSA PRIVATE KEY-----'
 
         if e.has_key(mode):
