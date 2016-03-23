@@ -77,7 +77,8 @@ class RenderCGI(RenderCLI):
 <form method="post" action="get.py">
  <table>
     <tr> <td>PWID:</td>   <td><input type="text" value="" name="pwid" autocomplete='off'></td></tr>
-    <tr><td><select name="mode">
+    <tr><td><input type="submit" /></td>
+    <td><select name="mode">
         <option value="get">format:all</option>
         <option value="simple">format:simple</option>
         <option value="mysql">format:mysql</option>
@@ -90,7 +91,7 @@ class RenderCGI(RenderCLI):
         <option value="note">field:note</option>
         <option value="password-nl">field:password-newline</option>
     </select></td>
-        <td><input type="submit" /></td>
+
     </tr>
     </tr>
  </table>
