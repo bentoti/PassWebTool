@@ -33,6 +33,9 @@ class RenderCLI(object):
             print e['username'] + '@' + e['host']
         elif mode == 'simple':
             print e['host'] + '\t' + e['username'] + '\t' + e['password']
+        elif mode == 'json':
+            import simplejson as json
+            print json.dumps(e)  #, sort_keys=True, indent=4 * ' ')
         else: # default
             for f in e.keys():
                 print f + "=" + str(e[f]) + linesep, #+ "<br>"
@@ -84,6 +87,7 @@ class RenderCGI(RenderCLI):
         <option value="mysql">format:mysql</option>
         <option value="url">format:url</option>
         <option value="user@host">format:user@host</option>
+        <option value="json">format:json</option>
         <option value="user">field:user</option>
         <option value="password">field:password</option>
         <option value="host">field:host</option>

@@ -27,6 +27,7 @@ yum install -y epel-release
 yum install -y httpd mod_ssl python-pip python-devel gcc autoconf git
 pip install --upgrade pip
 pip install keepass
+pip install simplejson
 
 vi /etc/httpd/conf/httpd.conf /etc/httpd/conf.d/vhost-pwt.conf ; systemctl restart httpd
 
