@@ -36,7 +36,7 @@ class KpDbClass(object):
             raise PassWebToolException(str(e))
 
 
-    def get_pwid(self, pwid):
+    def get_pwid(self, pwid, rqsrc='cli'):
         '''
         :param pwid: string
         :return: pwtsctrictire or none
@@ -51,7 +51,7 @@ class KpDbClass(object):
         if r is None:
             logging.warn("could not find entry for pwid '%s'", pwid)
         else:
-            logging.info("successfully found entry for pwid '%s'", pwid)
+            logging.info("successfully found entry for pwid '%s' (%s)", pwid, rqsrc)
         return r
 
     def get(self, filter = {}):

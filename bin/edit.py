@@ -8,6 +8,8 @@ from PassWebTool.Renderer import RenderCLI, RenderCGI
 ui = RenderCLI()
 if environ.has_key('HTTP_USER_AGENT'):
     ui = RenderCGI()
+else:
+    environ['REMOTE_ADDR'] = environ['USER']
 
 try:
     opmode, config, e = parseParams()
@@ -32,13 +34,13 @@ if __name__ == '__main__':
             ui.print_error("could not remove '"+str(new['pwid'])+"'")
         ui.print_entry_deleted(new['pwid'])
 
-    if new['pwid'] is None: new['pwid'] = generate_pwid()
+    if new['pwid'] is None: new['pwid'] = generate_pwid(length=config['pwid_length'])
 
     if opmode is None or opmode == '' or opmode == 'edit':
         old = KpDb.get_pwid(pwid=new['pwid'])
         if old is not None:
             new = KpDb.merge_entries(new, old)
-        if new['password'] == None: new['password'] = generate_pwid(size=12,chars=ascii_lowercase+ascii_uppercase+digits)
+        if new['password'] == None: new['password'] = generate_pwid(length=12, chars=ascii_lowercase + ascii_uppercase + digits)
         new = ui.edit_entry(new)
         if new is None:
             ui.quit()
