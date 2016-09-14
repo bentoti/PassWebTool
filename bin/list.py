@@ -7,6 +7,8 @@ from PassWebTool.Renderer import RenderCLI, RenderCGI
 ui = RenderCLI()
 if environ.has_key('HTTP_USER_AGENT'):
     ui = RenderCGI()
+else:
+    environ['REMOTE_ADDR'] = environ['USER']
 
 try:
     opmode, config, e = parseParams()

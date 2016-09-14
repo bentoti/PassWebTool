@@ -4,6 +4,7 @@ import logging, optparse, cgi, time, getpass
 from string import ascii_uppercase, ascii_lowercase,digits, punctuation
 from random import choice
 from pprint import pprint
+from os import environ
 
 class KpDbClass(object):
     def __init__(self, config):
@@ -36,7 +37,7 @@ class KpDbClass(object):
             raise PassWebToolException(str(e))
 
 
-    def get_pwid(self, pwid, rqsrc='cli'):
+    def get_pwid(self, pwid):
         '''
         :param pwid: string
         :return: pwtsctrictire or none
@@ -44,14 +45,14 @@ class KpDbClass(object):
         if pwid is None: return None
         r = self.get({'pwid': pwid})
         if len(r) > 1:
-            logging.warn("found more than one entry for pwid '%s', using latest", pwid)
+            logging.warn("found more than one entry for pwid '%s', using latest (%s)", pwid, environ['REMOTE_ADDR'])
             r = [r[-1]]
         elif len(r) < 1:    r = None
         else:               r = r[0]
         if r is None:
-            logging.warn("could not find entry for pwid '%s'", pwid)
+            logging.warn("could not find entry for pwid '%s' (%s)", pwid, environ['REMOTE_ADDR'])
         else:
-            logging.info("successfully found entry for pwid '%s' (%s)", pwid, rqsrc)
+            logging.info("successfully found entry for pwid '%s' (%s)", pwid, environ['REMOTE_ADDR'])
         return r
 
     def get(self, filter = {}):
@@ -71,7 +72,7 @@ class KpDbClass(object):
                              'host': each.title.strip().split('::')[0], 'service': each.title.strip().split('::')[1],
                              'notes': each.notes}
                 except IndexError, e:
-                    logging.debug("entry does not match title (HOSTNAME::SERVICE): %s", str(each))
+                    logging.error("entry does not match title (HOSTNAME::SERVICE): %s", str(each))
                     continue
 
                 f_out = False
@@ -90,10 +91,10 @@ class KpDbClass(object):
         if pwid is None: return False
         entry = self.get({'pwid':pwid})
         if len(entry) == 0:
-            logging.warn("could not remove '%s': pwid not found", pwid)
+            logging.warn("could not remove '%s': pwid not found (%s)", pwid, environ['REMOTE_ADDR'])
             return False
         username = entry[0]['username']
-        logging.info("removing pwid '%s'", pwid)
+        logging.info("removing pwid '%s' (%s)", pwid, environ['REMOTE_ADDR'])
         self.db.remove_entry(username = username, url = pwid)
         return True
 
@@ -108,7 +109,7 @@ class KpDbClass(object):
 
         title = str(new['host']) + '::' + str(new['service'])
 
-        logging.info("adding pwid '%s'", new['pwid'])
+        logging.info("adding pwid '%s' (%s)", new['pwid'], environ['REMOTE_ADDR'])
 
         self.db.add_entry(path=self.config['kpgroup'], url=new['pwid'], title=title, username=new['username'], password=new['password'],
                           notes=new['notes'], imageid=30)
