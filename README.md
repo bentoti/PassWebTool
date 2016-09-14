@@ -8,8 +8,24 @@ PassWebTool eliminates the need to have that Password in the script itself but c
 ## How it works
 PassWebTool is a Python script which interfaces between CGI(or CLI) and a KeePass KDB Database. You can acquire a
 specific Password by requesting a certain Identifier (PWID), like this:
-
-wget --post-data="pwid=79IXES" -qO - https://PassWebTool/get.py
+```
+# wget --post-data="pwid=Q8HI5R" -qO - https://PassWebTool/get.py   #--no-check-certificate
+username=mysql-backup
+service=MySQL
+notes=used for sql exports
+host=databaseserver.local
+pwid=Q8HI5R
+password=this-is-the-very-password
+```
+or as json:
+```
+# wget --post-data="pwid=Q8HI5R&mode=json" -qO - https://PassWebTool/get.py 
+{"username": "mysql-backup", "service": "MySQL", "notes": "used for sql exports", "host": "databaseserver.local", "pwid": "Q8HI5R", "password": "this-is-the-very-password"}
+```
+or straight as arguments?
+```
+# wget --post-data="pwid=Q8HI5R&mode=mysql" -qO - https://PassWebTool/get.py | xargs mysql
+```
 
 PassWebTool features a list and simpe edit interfaces. Just create an empty KeePass file, configure it's location and
 Password in pwt.ini, and start adding your passwords via webui. While adding a entry, a pwid will given to you. Use
