@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
-import logging, optparse, cgi, time, getpass
+import logging, optparse, cgi
 from string import ascii_uppercase, ascii_lowercase,digits, punctuation
 from random import choice
 from os import environ
-from time import sleep
 from ConfigParser import ConfigParser
 from PassWebToolClass import PassWebToolException
 

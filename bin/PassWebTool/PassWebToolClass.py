@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 from keepass import kpdb
-import logging, optparse, cgi, time, getpass
-from string import ascii_uppercase, ascii_lowercase,digits, punctuation
-from random import choice
-from pprint import pprint
+import logging, getpass
 from os import environ
 
 class KpDbClass(object):
