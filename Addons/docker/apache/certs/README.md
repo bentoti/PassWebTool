@@ -1,6 +1,6 @@
-h2. create CA and Certs self signed
+# create CA and Certs self signed
 
-h3. create CA
+## create CA
 ```
 # generate CA Key
 openssl genrsa -aes256 -out CertAuth.key.org 2048
@@ -12,7 +12,7 @@ openssl req -new -x509 -days 3650 -key CertAuth.key -out CertAuth.crt -subj "/C=
 openssl x509 -in CertAuth.crt -text -noout
 ```
 
-h3. generate default vhost cert
+## generate default vhost cert
 ```
 openssl genrsa -aes256 -out default.key.org 2048
 openssl rsa -in default.key.org -out default.key
@@ -21,7 +21,7 @@ openssl x509 -req -in default.csr -out default.crt -sha256 -CA CertAuth.crt -CAk
 openssl x509 -in default.crt -text -noout
 ```
 
-h3. generate PassWebTool vhost cert
+## generate PassWebTool vhost cert
 ```
 openssl genrsa -aes256 -out PassWebTool.key.org 2048
 openssl rsa -in PassWebTool.key.org -out PassWebTool.key
