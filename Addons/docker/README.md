@@ -24,7 +24,7 @@ systemctl enable docker; systemctl start docker
 cd ~  # go home!
 git clone https://github.com/maldex/PassWebTool.git PWT_docker_build
 cd PWT_docker_build/Addons/docker/
-docker build -t PassWebTool .
+docker build -t pass_web_tool .
 
-docker run -p 80:80 -p 443:443 -i -t pwt /bin/bash
+docker run -p 80:80 -p 443:443 -i -t pass_web_tool /bin/bash
 ```
