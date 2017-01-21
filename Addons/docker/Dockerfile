@@ -1,6 +1,6 @@
 # vi Dockerfile; docker build -t pwt . && docker run -p 80:80 -p 443:443 -i -t pwt /bin/bash
 FROM    centos:7.3.1611
-#RUN    yum upgrade -y && yum clean all
+RUN    yum upgrade -y && yum clean all
 
 COPY	10-deps.sh /10-deps.sh
 RUN	/10-deps.sh

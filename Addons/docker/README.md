@@ -3,7 +3,7 @@
 vi Dockerfile; docker build -t pwt . && docker run -p 80:80 -p 443:443 -i -t pwt /bin/bash
 ```
 ## prebuild
-head over to https://hub.docker.com
+head over to https://hub.docker.com/r/maldex/pass_web_tool/
 
 ##. building your own image
 - ensure you got docker installed
