@@ -1,0 +1,30 @@
+# custom settings
+UseCanonicalName            Off
+DeflateCompressionLevel     1
+HostnameLookups             on
+
+# ssl
+Listen                      443 https
+SSLPassPhraseDialog         exec:/usr/libexec/httpd-ssl-pass-dialog
+SSLSessionCache             shmcb:/run/httpd/sslcache(512000)
+SSLSessionCacheTimeout      5
+SSLRandomSeed               startup file:/dev/urandom  256
+SSLRandomSeed               connect builtin
+SSLCryptoDevice             builtin
+SSLProtocol                 all -SSLv2 -SSLv3 -TLSV1
+SSLCipherSuite              HIGH:MEDIUM:!aNULL:!MD5:!SEED:!IDEA:!SSLv3:!SSLv2:!TLSv1
+
+# default vhosts
+<VirtualHost *:80>
+    RewriteEngine           on
+    RewriteCond             %{HTTPS}    off
+    RewriteRule             (.*)        https://%{HTTP_HOST}%{REQUEST_URI}
+</VirtualHost>
+
+<VirtualHost *:443>
+    DocumentRoot            /var/www/html
+    SSLEngine               on
+    SSLCertificateChainFile certs/CertAuth.crt
+    SSLCertificateFile      certs/default.crt
+    SSLCertificateKeyFile   certs/default.key
+</VirtualHost>
