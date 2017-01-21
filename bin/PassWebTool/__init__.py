@@ -4,6 +4,8 @@ from string import ascii_uppercase, ascii_lowercase,digits, punctuation
 from random import choice
 from os import environ
 from ConfigParser import ConfigParser
+from time import sleep
+
 from PassWebToolClass import PassWebToolException
 
 
