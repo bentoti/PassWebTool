@@ -6,6 +6,7 @@ echo ">>>>>>>>> $0: cloning PassWebTool <<<<<<<<<"
 cd /opt
 git clone https://github.com/maldex/PassWebTool.git
 cd PassWebTool
+rm -rf Addons/
 git pull || exit 255
 mkdir var/log
 
