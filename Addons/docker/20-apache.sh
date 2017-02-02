@@ -6,8 +6,8 @@ systemctl enable httpd
 cd /etc/httpd
 
 echo "<title>default vhost</title>
-<body>You just hit the default vhost of this webserver. Check your URL.</title>
-" > /var/www/html/index.html
+<body>You just hit the default vhost of this webserver. Check your URL.</body>
+<br>" > /var/www/html/index.html
 
 # configure defaults
 sed -i 's/^ServerAdmin .*/ServerAdmin no@bo.dy/' conf/httpd.conf
