@@ -19,7 +19,7 @@ COPY 	30-install.sh /30-install.sh
 RUN	/30-install.sh
 
 
-#§RUN	rm [0-9][0-9]-*.sh
+RUN	rm [0-9][0-9]-*.sh
 
 COPY	start.sh /start.sh
 
