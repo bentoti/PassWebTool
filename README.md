@@ -1,7 +1,7 @@
 # About
 When writing scripts for infrastructure automation i often end up at a point where i need a plaintext password for a
 certain service. MySQL, Coldfusiuon Administrator, Webinterfaces to appliances, etc. are notorious unaware of public-
-private key mechanisms and i often call http://user:pass@womewhere in a script.
+private key mechanisms and i often call http://user:pass@somewhere in a script.
 
 PassWebTool eliminates the need to have that Password in the script itself but can be accessed whenever needed.
 
