@@ -36,6 +36,11 @@ class RenderCLI(object):
         elif mode == 'json':
             import simplejson as json
             print json.dumps(e)  #, sort_keys=True, indent=4 * ' ')
+        elif mode == 'json-nl' or mode == 'get': # from list-form
+            import simplejson as json
+            print "<pre>"
+            print json.dumps(e, sort_keys=True, indent=4 * ' ')
+            print "</pre>"
         else: # default
             for f in e.keys():
                 print f + "=" + str(e[f]) + linesep, #+ "<br>"
@@ -88,6 +93,7 @@ class RenderCGI(RenderCLI):
         <option value="url">format:url</option>
         <option value="user@host">format:user@host</option>
         <option value="json">format:json</option>
+        <option value="json-nl">format:json-newline</option>
         <option value="user">field:user</option>
         <option value="password">field:password</option>
         <option value="host">field:host</option>
@@ -139,14 +145,13 @@ class RenderCGI(RenderCLI):
                 print "<td>" + str(entry[f]) + "</td>"
 
         print "<form method='post' action='edit.py'>"
-        print "<input type='hidden' name='pwid' value='" + str(entry['pwid']) + "' >"
-
+        print " <input type='hidden' name='pwid' value='" + str(entry['pwid']) + "' >"
         print "<td><input type='submit' name='mode' value='edit'/></td></form>"
 
 
         print "<form method='post' action='get.py'>"
-        print "<input type='hidden' name='pwid' value='" + str(entry['pwid']) + "' >"
-        print " <td><input type='submit' name='mode' value='get'/></td></form>"
+        print " <input type='hidden' name='pwid' value='" + str(entry['pwid']) + "' >"
+        print "<td><input type='submit' name='mode' value='get'/></td></form>"
 
         print "</tr>"
 
