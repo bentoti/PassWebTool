@@ -40,7 +40,7 @@ Reference system is a CentOS 7. Please use 'keepassx' to create the initial KDB 
 ## base requirements
 ```
 yum install -y epel-release
-yum install -y httpd mod_ssl python-pip python-devel gcc autoconf git
+yum install -y httpd mod_ssl python-pip python-devel autoconf git gcc   redhat-rpm-config
 pip install --upgrade pip
 pip install keepass
 pip install simplejson
