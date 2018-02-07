@@ -1,1 +1,1 @@
-declare -A MyUser=( ["root"]="S3KS1H"  ["john_doe"]="RKJ1SC"  ["phpuser"]="J2MSLV")
+declare -A MyUsers=( ["root"]="S3KS1H"  ["john_doe"]="RKJ1SC"  ["phpuser"]="J2MSLV")
