@@ -5,7 +5,7 @@ from PassWebClient import PassWebClient
 os.environ['AppEnv'] = 'devel'   # better to set this externally, for the sake of demonstration
 
 class MultiPassWebClient(PassWebClient):
-    def __init__(self, filename == None):
+    def __init__(self, filename=None):
         super(type(self), self).__init__()
         if filename is None:
             filename = '.credentials.' + os.environ['AppEnv'] + '.sh'
